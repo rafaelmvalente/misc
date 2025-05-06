@@ -14,10 +14,10 @@ print("\n 6. Sair")
 opcao = input("Escolha uma dessas opções: ")
 
 if opcao == "1":
-    numero_voo = int(input("Digite o número do voo: "))
+    numeroVoo = int(input("Digite o número do voo: "))
     vooExiste = 0
 for chave in voos:
-    if chave == numero_voo:
+    if chave == numeroVoo:
         vooExiste = 1
     if vooExiste == 1:
         print("Voo já cadastrado!")
@@ -27,4 +27,8 @@ for chave in voos:
         escalas = int(input("Número de escalas: "))
         preco = float(input("Preço da passagem: "))
         lugares = int(input("Quantidade de lugares disponíveis: "))
+        voos[numeroVoo] = {"origem": origem, "destino": destino, "escalas": escalas, "preco": preco, "lugares": lugares}
+        voosDisponiveis.append(numeroVoo)
+        passageirosVoo[numeroVoo] = []
+        print("Voo cadastrado com sucesso")
         
