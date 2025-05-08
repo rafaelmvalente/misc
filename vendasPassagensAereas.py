@@ -40,5 +40,12 @@ elif opcao == 2:
     Consulta = input("Digite o tipo de consulta: ")
     if Consulta == "1":
         numeroVoo = int(input("Digite o número do voo: ")
+        encontrou = 0
+        chaveEncontrada = ""
+        for chave in voos.keys():
+            if chave == numero_voo and encontrou == 0:
+                encontrou = 1
+                chave_encontrada = chave
+    
         
         
