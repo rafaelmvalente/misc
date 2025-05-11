@@ -31,21 +31,6 @@ for chave in voos:
         voosDisponiveis.append(numeroVoo)
         passageirosVoo[numeroVoo] = []
         print("Voo cadastrado com sucesso")
-elif opcao == 2:
-    print("\n Tipos de consulta:")
-    print("1. Por código de voo")
-    print("2. Por cidade origem")
-    print("3. Por cidade destino")
-    print("4. Por voo com menor escala")
-    Consulta = input("Digite o tipo de consulta: ")
-    if Consulta == "1":
-        numeroVoo = int(input("Digite o número do voo: ")
-        encontrou = 0
-        chaveEncontrada = ""
-        for chave in voos.keys():
-            if chave == numero_voo and encontrou == 0:
-                encontrou = 1
-                chave_encontrada = chave
-    
+
         
         
