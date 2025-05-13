@@ -46,13 +46,13 @@ while sistema != "0":
             print(f"Cidade origem: {origem}")
             print(f"Cidade destino: {destino}")
             print(f"Número de escalas: {escalas}")
-            print(f"Preço da passagem: {preco}")
+            print(f"Preço da passagem: {preco} R$")
             print(f"Lugares: {lugares}")
         else:
             print("Voo não encontrado :( ")
 
         if tipoConsulta == "2":
             cidadeOrigem = input("Qual a cidade origem? ")
-            print(f"Número do voo = {numeroVoo}")
+            print(f"Número do voo: {numeroVoo}")
             print(f"Cidade destino: {destino}")
             print(f"Preço: {preco}")
