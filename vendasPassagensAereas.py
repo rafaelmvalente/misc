@@ -55,4 +55,8 @@ while sistema != "0":
             cidadeOrigem = input("Qual a cidade origem? ")
             print(f"Número do voo: {numeroVoo}")
             print(f"Cidade destino: {destino}")
+<<<<<<< HEAD
             print(f"Preço: {preco}")
+=======
+            print(f"Preço: {preco}")
+>>>>>>> 5fa2157ef24bccba2385956608ad79ab30db65f4
