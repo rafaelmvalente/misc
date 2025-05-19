@@ -55,6 +55,15 @@ while sistema != "0":
                     print(f"Preço: {preco}")
                 else:
                     print("Nenhum voo encontrado com essa origem.")
+        if tipoConsulta == "3":
+            cidadeDestino = input("\nQual a cidade de destino? ")
+            for numeroVoo in voos:
+                if voos[numeroVoo]["destino"] == cidadeDestino:
+                    print(f"\nNúmero do voo: {numeroVoo}")
+                    print(f"\nOrigem: {voos[numeroVoo]['origem']}")
+                    print(f"\nPreço: {voos[numeroVoo]['preco']} R$")
+                else:
+                    print("\nNenhum voo encontrado com esse destino.")
 
 
 
