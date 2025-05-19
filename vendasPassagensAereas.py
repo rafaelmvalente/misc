@@ -16,22 +16,16 @@ while sistema != "0":
     opcao = input("Escolha uma dessas opções: ")
 
     if opcao == "1":
-        numeroVoo = int(input("Digite o número do voo: "))
-        origem = input("Cidade origem: ")
-        destino  = input("Cidade destino: ")
-        escalas = int(input("Número de escalas: "))
-        preco = float(input("Preço da passagem, em reais: "))
-        lugares = int(input("Quantidade de lugares disponíveis: "))
+        numeroVoo = int(input("\nDigite o número do voo: "))
+        origem = input("\nCidade origem: ")
+        destino  = input("\nCidade destino: ")
+        escalas = int(input("\nNúmero de escalas: "))
+        preco = float(input("\nPreço da passagem, em reais: "))
+        lugares = int(input("\nQuantidade de lugares disponíveis: "))
         voos[numeroVoo] = {"origem": origem, "destino": destino, "escalas": escalas, "preco": preco, "lugares": lugares}
         voosDisponiveis.append(numeroVoo)
         passageirosVoo[numeroVoo] = []
-        print("Voo cadastrado com sucesso")
-        vooExiste = 0
-    for chave in voos:
-        if chave == numeroVoo:
-            vooExiste = 1
-        if vooExiste == 1:
-            print("Voo já cadastrado!")
+        print("\nVoo cadastrado com sucesso")
 
     if opcao == "2":
         print("\n TIPOS DE CONSULTA:")
@@ -41,22 +35,26 @@ while sistema != "0":
         print("4. Voo com menor escala")
 
         tipoConsulta = input("Escolha uma dessas opções: ")
+
         if tipoConsulta == "1":
-            numeroVoo = int(input("Digite o número do voo: "))
-            print(f"Cidade origem: {origem}")
-            print(f"Cidade destino: {destino}")
-            print(f"Número de escalas: {escalas}")
-            print(f"Preço da passagem: {preco} R$")
-            print(f"Lugares: {lugares}")
+            numeroVoo = int(input("\nDigite o número do voo: "))
+            print(f"\nCidade origem: {voos[numeroVoo]['origem']}")
+            print(f"\nCidade destino: {voos[numeroVoo]['destino']}")
+            print(f"\nNúmero de escalas: {voos[numeroVoo]['escalas']}")
+            print(f"\nPreço da passagem: {voos[numeroVoo]['preco']} R$")
+            print(f"\nLugares disponíveis: {voos[numeroVoo]['lugares']}")
         else:
-            print("Voo não encontrado :( ")
+            print("\nVoo não encontrado")
 
         if tipoConsulta == "2":
-            cidadeOrigem = input("Qual a cidade origem? ")
-            print(f"Número do voo: {numeroVoo}")
-            print(f"Cidade destino: {destino}")
-<<<<<<< HEAD
-            print(f"Preço: {preco}")
-=======
-            print(f"Preço: {preco}")
->>>>>>> 5fa2157ef24bccba2385956608ad79ab30db65f4
+            cidadeOrigem = input("Qual a cidade de origem? ")
+            for numeroVoo in voos:
+                if voos[numeroVoo]["origem"] == cidadeOrigem:
+                    print(f"Número do voo: {numeroVoo}")
+                    print(f"Cidade destino: {destino}")
+                    print(f"Preço: {preco}")
+                else:
+                    print("Nenhum voo encontrado com essa origem.")
+
+
+
