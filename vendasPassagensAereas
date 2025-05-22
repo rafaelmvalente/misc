@@ -4,14 +4,15 @@ voosDisponiveis = []
 passageirosVoo = {}
 
 sistema = ""
-while sistema != "0":
+while sistema != "7":
     print("SISTEMAS DE PASSAGENS AÉREAS:")
     print("\n 1. Cadastrar voo")
     print("\n 2. Consultar voo")
     print("\n 3. Listar passageiros de um voo")
-    print("\n 4. Vender passagem")
-    print("\n 5. Cancelar passagem")
-    print("\n 6. Sair")
+    print("\n 4. Voo com menor escala")
+    print("\n 5. Vender passagem")
+    print("\n 6. Cancelar passagem")
+    print("\n 7. Sair")
 
     opcao = input("Escolha uma dessas opções: ")
 
@@ -26,13 +27,13 @@ while sistema != "0":
         voosDisponiveis.append(numeroVoo)
         passageirosVoo[numeroVoo] = []
         print("\nVoo cadastrado com sucesso")
+        input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
     if opcao == "2":
         print("\n TIPOS DE CONSULTA:")
         print("1. Código de Voo")
         print("2. Cidade origem")
         print("3. Cidade destino")
-        print("4. Voo com menor escala")
 
         tipoConsulta = input("Escolha uma dessas opções: ")
 
@@ -43,8 +44,10 @@ while sistema != "0":
             print(f"\nNúmero de escalas: {voos[numeroVoo]['escalas']}")
             print(f"\nPreço da passagem: {voos[numeroVoo]['preco']} R$")
             print(f"\nLugares disponíveis: {voos[numeroVoo]['lugares']}")
+            input("\nPressione Enter para continuar...")
         else:
             print("\nVoo não encontrado")
+            input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
         if tipoConsulta == "2":
             cidadeOrigem = input("Qual a cidade de origem? ")
@@ -55,6 +58,8 @@ while sistema != "0":
                     print(f"Preço: {preco}")
                 else:
                     print("Nenhum voo encontrado com essa origem.")
+            input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+
         if tipoConsulta == "3":
             cidadeDestino = input("\nQual a cidade de destino? ")
             for numeroVoo in voos:
@@ -64,6 +69,8 @@ while sistema != "0":
                     print(f"\nPreço: {voos[numeroVoo]['preco']} R$")
                 else:
                     print("\nNenhum voo encontrado com esse destino.")
+            input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+        if opcao == "4":
 
 
 
