@@ -8,8 +8,8 @@ while sistema != "7":
     print("SISTEMAS DE PASSAGENS AÉREAS:")
     print("\n 1. Cadastrar voo")
     print("\n 2. Consultar voo")
-    print("\n 3. Listar passageiros de um voo")
-    print("\n 4. Voo com menor escala")
+    print("\n 3. Voo com menor escala")
+    print("\n 4. Listar passageiros de um voo")
     print("\n 5. Vender passagem")
     print("\n 6. Cancelar passagem")
     print("\n 7. Sair")
@@ -70,7 +70,35 @@ while sistema != "7":
                 else:
                     print("\nNenhum voo encontrado com esse destino.")
             input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
-        if opcao == "4":
+    if opcao == "3":
+        origem = input("Digite sua cidade origem: ")
+        destino = input("Digite sua cidade destino: ")
+        menorEscala = -1
+        codigoVoo = ""
 
+        for numeroVoo in voos:
+            if voos[numeroVoo]["origem"] == origem and voos[numeroVoo]["destino"] == destino:
+                if menorEscala == -1 or voos[numeroVoo]["escalas"] < menorEscala:
+                    menorEscala = voos[numeroVoo]["escalas"]
+                    codigoVoo = numeroVoo
+        if codigoVoo != "":
+            print(f"\nVoo com menor escala: {codigoVoo}")
+            print(f"\nOrigem: {origem}")
+            print(f"\nDestino: {destino}")
+            print(f"\nEscalas: {escalas}")
+            print(f"\nPreço: {preco}")
+            print(f"\nLugares disponíveis: {lugares}")
+        else:
+            print("Nenhum voo encontrado para essa rota")
+        input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+    if opcao == "4":
+        numeroVoo = int(input("\nDigite o número do voo: "))
+        if numeroVoo in voos:
+            print(f"\nPassageiros do voo{numeroVoo}: ")
+        if len(passageirosVoo[numeroVoo]) > 0:
+            for cpf in passageirosVoo[numeroVoo]:
+                print(f"CPF: {cpf} | Nome: {passageiros[cpf]['nome']}")
+            else:
+                print("Nenhum passageiro nesse voo")
 
 
