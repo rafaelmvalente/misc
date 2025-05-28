@@ -90,7 +90,8 @@ while sistema != "7":
             print(f"\nLugares disponíveis: {lugares}")
         else:
             print("Nenhum voo encontrado para essa rota")
-        input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+    input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+
     if opcao == "4":
         numeroVoo = int(input("\nDigite o número do voo: "))
         if numeroVoo in voos:
@@ -103,3 +104,30 @@ while sistema != "7":
             print(f"Lugares disponíveis: {voos[numeroVoo]['lugares']}")
         else:
             print("Voo não encontrado: ")
+    input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+
+    if opcao == "5":
+        numeroVoo = int(input("Digite o número do voo: "))
+
+        if numeroVoo in voos:
+            if voos[numeroVoo]["lugares"] > 0:
+                cpf = input("Digite o CPF do passageiro: ")
+
+                if cpf not in passageiros:
+                    nome = input("Digite o nome do passageiro: ")
+                    telefone = input("Digite o telefone do passageiro: ")
+                    passageiros[cpf] = {"nome": nome, "telefone": telefone}
+                    passageirosVoo[numeroVoo].append(cpf)
+                    voos[numeroVoo]["lugares"] = voos[numeroVoo]["lugares"] - 1
+
+                    if voos[numeroVoo]["lugares"] == 0:
+                        if numeroVoo in voosDisponiveis:
+                            voosDisponiveis.remove(numeroVoo)
+                    print("Passagem vendida com sucesso!")
+                else:
+                    print("Este CPF já está cadastrado.")
+            else:
+                print("Voo lotado.")
+        else:
+            print("Voo não encontrado.")
+    input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
