@@ -99,6 +99,7 @@ while sistema != "7":
             for cpf in passageirosVoo[numeroVoo]:
                 print(f"CPF: {cpf} | Nome: {passageiros[cpf]['nome']}")
             else:
-                print("Nenhum passageiro nesse voo")
-
-
+                print("Nenhum passageiro nesse voo.")
+            print(f"Lugares disponíveis: {voos[numeroVoo]['lugares']}")
+        else:
+            print("Voo não encontrado: ")
