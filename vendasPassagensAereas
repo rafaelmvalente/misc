@@ -18,15 +18,18 @@ while opcao != "7":
 
     if opcao == "1":
         numeroVoo = int(input("\nDigite o número do voo: "))
-        origem = input("\nCidade origem: ")
-        destino  = input("\nCidade destino: ")
-        escalas = int(input("\nNúmero de escalas: "))
-        preco = float(input("\nPreço da passagem, em reais: "))
-        lugares = int(input("\nQuantidade de lugares disponíveis: "))
-        voos[numeroVoo] = {"origem": origem, "destino": destino, "escalas": escalas, "preco": preco, "lugares": lugares}
-        voosDisponiveis.append(numeroVoo)
-        passageirosVoo[numeroVoo] = []
-        print("\nVoo cadastrado com sucesso")
+        if numeroVoo in voos:
+            print("\nEste número de voo já está cadastrado.")
+        else:
+            origem = input("\nCidade origem: ")
+            destino  = input("\nCidade destino: ")
+            escalas = int(input("\nNúmero de escalas: "))
+            preco = float(input("\nPreço da passagem, em reais: "))
+            lugares = int(input("\nQuantidade de lugares disponíveis: "))
+            voos[numeroVoo] = {"origem": origem, "destino": destino, "escalas": escalas, "preco": preco, "lugares": lugares}
+            voosDisponiveis.append(numeroVoo)
+            passageirosVoo[numeroVoo] = []
+            print("\nVoo cadastrado com sucesso")
         input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
     if opcao == "2":
@@ -56,6 +59,8 @@ while opcao != "7":
                     print(f"Número do voo: {numeroVoo}")
                     print(f"Cidade destino: {voos[numeroVoo]['destino']}")
                     print(f"Preço: {voos[numeroVoo]['preco']}")
+                else:
+                    print("Voo não encontrado.")
             input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
         if tipoConsulta == "3":
@@ -65,6 +70,8 @@ while opcao != "7":
                     print(f"\nNúmero do voo: {numeroVoo}")
                     print(f"\nOrigem: {voos[numeroVoo]['origem']}")
                     print(f"\nPreço: {voos[numeroVoo]['preco']} R$")
+                else:
+                    print("Voo não encontrado")
             input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
     if opcao == "3":
@@ -118,32 +125,40 @@ while opcao != "7":
                         voosDisponiveis.remove(numeroVoo)
                     print("Passagem vendida com sucesso!")
                 else:
-                    print("Este CPF já está cadastrado.")
+                    nome_cadastrado = passageiros[cpf]['nome']
+                    nome_novo = input("CPF já cadastrado. Confirme o nome do passageiro para validar: ")
+                    if nome_novo == nome_cadastrado:
+                        passageirosVoo[numeroVoo].append(cpf)
+                        voos[numeroVoo]["lugares"] -= 1
+                        if voos[numeroVoo]["lugares"] == 0 and numeroVoo in voosDisponiveis:
+                            voosDisponiveis.remove(numeroVoo)
+                        print("Passagem vendida com sucesso!")
+                    else:
+                        print("Erro: CPF já cadastrado com nome diferente.")
             else:
                 print("Voo lotado.")
         else:
             print("Voo não encontrado.")
         input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
-        if opcao == "6":
-            numeroVoo = int(input("Digite o número do voo: "))
-            cpf = input("Digite o CPF do passageiro a ser cancelado: ")
+    if opcao == "6":
+        numeroVoo = int(input("Digite o número do voo: "))
+        cpf = input("Digite o CPF do passageiro a ser cancelado: ")
 
-            if numeroVoo in voos and cpf in passageirosVoo[numeroVoo]:
-                passageirosVoo[numeroVoo].remove(cpf)
-                voos[numeroVoo]["lugares"] += 1
-                print("Passagem cancelada com sucesso!")
+        if numeroVoo in voos and cpf in passageirosVoo[numeroVoo]:
+            passageirosVoo[numeroVoo].remove(cpf)
+            voos[numeroVoo]["lugares"] += 1
+            print("Passagem cancelada com sucesso!")
 
-                contador = 0
-                for v in voosDisponiveis:
-                    if v == numeroVoo:
-                        contador += 1
-                if contador == 0:
-                    voosDisponiveis.append(numeroVoo)
-            else:
-                print("Voo ou passageiro não encontrado.")
-            input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
+            contador = 0
+            for v in voosDisponiveis:
+                if v == numeroVoo:
+                    contador += 1
+            if contador == 0:
+                voosDisponiveis.append(numeroVoo)
+        else:
+            print("Voo ou passageiro não encontrado.")
+        input("\nDeseja acessar o menu novamente? Pressione Enter para continuar...")
 
-
-        if opcao == "7":
-            print("\nSistema finalizado. Obrigado por utilizar!")
+    if opcao == "7":
+        print("\nSistema finalizado. Obrigado por utilizar!")
