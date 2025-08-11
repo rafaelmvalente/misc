@@ -1,0 +1,59 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    int opcao;
+    float num1, num2, resultado;
+    
+    printf("Digite seu primeiro número: ");
+    scanf("%f", & num1);
+    printf("Digite seu segundo número: ");
+    scanf("%f", & num2);
+    
+    printf("Perfeito. Agora que escolheu esses números, escolha alguma opção do menu :)\n\n");
+    
+    do {
+        printf("O 00 DOS MENUS:\n\n");
+        printf("1- Adição\n");
+        printf("2- Subtração\n");
+        printf("3- Multiplicação\n");
+        printf("4- Divisão\n");
+        printf("5 - Sair\n");
+        printf("Digite sua opção: \n\n");
+        scanf("%d", & opcao);
+        
+        switch (opcao) {
+            case 1:
+                resultado = num1 + num2;
+                printf("O resultado da adição dos seus números é: %.2f\n", resultado);
+                break;
+            case 2:
+                resultado = num1 - num2;
+                printf("O resultado da subtração dos seus números é: %.2f\n", resultado);
+                break;
+            case 3:
+                resultado = num1 * num2;
+                printf("O resultado da multiplicação dos seus números é: %.2f\n", resultado);
+                break;
+            case 4:
+                resultado = num1 / num2;
+                printf("O resultado da divisão dos seus números é: %.2f\n", resultado);
+                break;
+            case 5:
+                printf("Saindo do menu. Obrigado por utilizar :)\n");
+            default:
+                printf("Opcão inválida. Digite uma opção do menu: \n");
+        }
+    } while (opcao != 5);
+    
+
+    return 0;
+}
