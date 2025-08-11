@@ -1,0 +1,32 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    float A;
+    float B;
+    float C;
+    
+    printf("Digite o lado A do triângulo: ");
+    scanf("%f", & A);
+    printf("Digite o lado B do triângulo: ");
+    scanf("%f", & B);
+    printf("Digite o lado C do triângulo: ");
+    scanf("%f", & C);
+    
+    if ( ((A + B) > C) && ((A + C) > B) && ((B + C) > A) ) {
+        printf("Forma um triângulo");
+    }
+    else {
+        printf("Não forma um triângulo");
+    }
+
+    return 0;
+}
