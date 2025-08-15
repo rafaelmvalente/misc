@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main()
+{
+// ler um numero -- fora do loop
+// 1 ate n -- i <= n
+// soma par -- if % 2 == 0 -- soma += n
+
+    int n;
+    int soma_par = 0;
+    int soma_impar = 0;
+    
+    printf("Digite um número: ");
+    scanf("%d", & n);
+    
+    for(int i = 1; i <= n; i++) {
+        if(i % 2 == 0) {
+            soma_par += i;
+        }
+        else {
+            soma_impar += i;
+        }
+    }
+    printf("\nSoma dos pares: %d", soma_par);
+    printf("\nSoma dos ímpares: %d", soma_impar);
+
+    return 0;
+}
