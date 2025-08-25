@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    float matriz[20][20];
+    float soma = 0;
+    
+    printf("\nDigite o tamanho (máximo 20): ");
+    scanf("%d", & n);
+    
+    if(n < 1 || n > 20) {
+        printf("\nTamanho inválido.");
+        return 1;
+    }
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("\nM[%d][%d]: ", i, j);
+            scanf("%f", & matriz[i][j]);
+            if(i == j) {
+                soma += matriz[i][j];
+            }
+        }
+    }
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("\nMatriz = %6.2f", matriz[i][j]);
+        }
+    }
+    printf("\nSoma = %f", soma);
+
+    return 0;
+}
