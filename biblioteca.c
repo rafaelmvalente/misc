@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 // Criação do struct Pessoa
 struct Pessoa {
@@ -40,7 +41,7 @@ void Cadastrar(struct Biblioteca *b) {
     printf("Digite o ID do livro: ");
     scanf("%d", &novo.id);
     for(int i = 0; i < b->sz_l; i++) {
-        if(id_existe == id) {
+        if(b->livros[i].id == novo.id) {
             id_existe = 1; // Já que existe um livro com esse ID, ele vira 1 (significa que achou)
             break;
         }
@@ -52,7 +53,7 @@ void Cadastrar(struct Biblioteca *b) {
     
     // Cadastrando autor, título, ano de publicação e quantidades disponíveis
     printf("Digite o nome do título do livro: ");
-    scanf(" %[^\n]", novo.título);
+    scanf(" %[^\n]", novo.titulo);
     printf("Digite o autor do livro: ");
     scanf(" %[^\n]", novo.autor);
     printf("Digite o ano de publicação do livro (4 dígitos): ");
@@ -96,7 +97,79 @@ void Consultar(struct Biblioteca *b) {
             printf("Quantidade disponível: %d\n", b->livros[i].qtd_disponivel);
         }
     }
+    else if(opc == 2) {
+        int id_procurado, encontrado = 0; // Condição de parada. Começa no 0 porque significa que não achou nada
+        printf("Digite o ID do livro: ");
+        scanf("%d", &id_procurado);
+        
+        for(int i = 0; i < b->sz_l; i++) {
+            if(b->livros[i].id == id_procurado) { // Caso o id procurado seja igual ao id do livro
+                // Print das informações do livro, incluindo id
+                printf("Título do livro: %s\n", b->livros[i].titulo);
+                printf("Autor do livro: %s\n", b->livros[i].autor);
+                printf("Ano de publicação: %d\n", b->livros[i].ano_publicacao);
+                printf("ID do livro: %d\n", b->livros[i].id);
+                printf("Quantidade disponível: %d\n", b->livros[i].qtd_disponivel);
+                encontrado = 1; // Mudou para 1 porque achou o livro
+                break;
+            }
+        }
+        if(!encontrado) { // Caso o livro não possua o id digitado
+            printf("Livro não encontrado\n");
+        }
+        else {
+            printf("Opção inválida\n"); // Como se fosse o "default" no switch-case
+        }
+    }
 }
+
+// Criação de uma função para Emprestar livros
+void Emprestar(struct Biblioteca *b) {
+    int id_buscar;
+    printf("Digite o ID do livro para empréstimo: ");
+    scanf("%d", &id_buscar);
+    
+    int idx = -1; // Começa com menos -1 porque significa que não foi encontrado
+    for(int i = 0; i < b->sz_l; i++) {
+        if(b->livros[i].id == id_buscar) { // Caso o id buscado estiver cadastrado
+            idx = i; // Armazena na posição
+            break;
+        }
+    }
+    
+    if(idx == -1) { // Caso o idx continue sendo -1
+        printf("Livro não encontrado"); // Printa que o livro não foi encontrado
+        return;
+    }
+    
+    struct Livro *l = &b->livros[idx]; // Está apontando para o livro da posição idx
+    if(l->qtd_disponivel == 0) {
+        printf("Quantidade de livros indisponíveis\n"); 
+        return;
+    }
+    
+    // Criação de um "mini cadastro" para realizar o empréstimo
+    struct Pessoa p;
+    printf("Digite seu nome: ");
+    scanf(" %[^\n]", p.nome);
+    printf("Digite seu CPF: ");
+    scanf("%s", p.cpf);
+    
+    for(int i = 0; i < l->sz_p; i++) {
+        if(strcmp(l->pessoas[i].cpf, p.cpf) == 0) { // Caso a pessoa já tenha pego esse livro
+            printf("Essa pessoa já pegou esse livro\n"); // Printa que ele já pegou
+            return;
+        }
+    }
+    
+    l->pessoas[l->sz_p] = p; // Adiciona nas pessoas que já emprestaram livros
+    l->sz_p++;  // Aumenta o tamanho de pessoas que já emprestaram livros
+    l->qtd_disponivel--; // Diminui a quantidade de exemplares disponíveis
+    printf("Empréstimo realizado com sucesso");
+}
+
+// Criação da função para Devolver livros
+
    
 int main() {
     return 0;
