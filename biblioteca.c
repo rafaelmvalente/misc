@@ -31,7 +31,7 @@ struct Biblioteca {
 void Cadastrar(struct Biblioteca *b) {
     
     if(b->sz_l >= 100) {
-        printf("Limite máximo de livros atingidos");
+        printf("\nLimite máximo de livros atingidos");
         return;
     }
     
@@ -117,10 +117,10 @@ void Consultar(struct Biblioteca *b) {
         if(!encontrado) { // Caso o livro não possua o id digitado
             printf("Livro não encontrado\n");
         }
-        else {
+    }
+    else {
             printf("Opção inválida\n"); // Como se fosse o "default" no switch-case
         }
-    }
 }
 
 // Criação de uma função para Emprestar livros
@@ -165,12 +165,122 @@ void Emprestar(struct Biblioteca *b) {
     l->pessoas[l->sz_p] = p; // Adiciona nas pessoas que já emprestaram livros
     l->sz_p++;  // Aumenta o tamanho de pessoas que já emprestaram livros
     l->qtd_disponivel--; // Diminui a quantidade de exemplares disponíveis
-    printf("Empréstimo realizado com sucesso");
+    printf("Empréstimo realizado com sucesso\n");
 }
 
 // Criação da função para Devolver livros
+void Devolver(struct Biblioteca *b) {
+    int id_busca;
+    printf("Digite o ID do livro para empréstimo: ");
+    scanf("%d", &id_busca);
 
+    int idx = -1;
+    for (int i = 0; i < b->sz_l; i++) {
+        if (b->livros[i].id == id_busca) {
+            idx = i;
+            break;
+        }
+    }
+
+    if (idx == -1) {
+        printf("Livro não encontrado.\n");
+        return;
+    }
+
+    struct Livro *l = &b->livros[idx];
+    char cpf[15];
+    printf("Digite o CPF da pessoa: ");
+    scanf("%s", cpf);
+    
+    int achou = 0; // Condição de parada -- Significa que não achou
+    for(int i = 0; i < l->sz_p; i++) {
+        if(strcmp(l->pessoas[i].cpf, cpf) == 0) {
+            // Move todos elementos uma posição pra trás
+            for(int j = i; j < l->sz_p - 1; j++) { // Sobrescrevendo a pessoa que está devolvendo
+                l->pessoas[j] = l->pessoas[j + 1];
+            }
+            l->sz_p--; // Reduz o contador de pessoas
+            l->qtd_disponivel++; // Aumenta a quantidade disponível
+            achou = 1; // Condição de parada -- Significa que achou
+            break;
+        }
+    }
+    
+    if(!achou) { // Caso não ache
+        printf("Esse pessoa não possui esse livro emprestado\n"); // Printa que a pessoa não possui esse livro emprestado
+    }
+    else { // Caso contrário
+        printf("Devolução registrada com sucesso\n"); // Achou e printa que a devolução foi registrada
+    }
+}
+
+// Criação da função pra Remover livro
+void Remover(struct Biblioteca *b) {
+    int id_procurar;
+    printf("Digite o ID do livro que deseja remover: ");
+    scanf("%d", &id_procurar);
+    
+    int idx = -1;
+    for(int i = 0; i < b->sz_l; i++) {
+        if(b->livros[i].id == id_procurar) {
+            idx = i;
+            break;
+        }
+    }
+    
+    if(idx == -1) {
+        printf("Livro não encontrado\n");
+        return;
+    }
+    
+    for(int i = idx; i <b->sz_l; i++) { // Remove o livro, deslocando todos os livros uma posição para trás
+        b->livros[i] = b->livros[i + 1]; // Sobrescreve o livro atual com o próximo
+    }
+    
+    b->sz_l--; // Atualiza o contador de livros da biblioteca
+    printf("Livro removido com sucesso\n");
+}
    
 int main() {
+    
+    struct Biblioteca bib;
+    bib.sz_l = 0;
+    int opcao;
+    
+    // Criação do Menu
+    do {
+        printf("MENU\n\n");
+        printf("\n1 - Cadastrar livro");
+        printf("\n2 - Consultar livro");
+        printf("\n3 - Emprestar livro");
+        printf("\n4 - Devolver livro");
+        printf("\n5 - Remover livro");
+        printf("\n6 - Sair");
+        printf("\n\nDigite a opção que deseja utilizar: ");
+        scanf("%d", &opcao);
+        
+        switch(opcao) {
+            case 1:
+                Cadastrar(&bib);
+                break;
+            case 2:
+                Consultar(&bib);
+                break;
+            case 3:
+                Emprestar(&bib);
+                break;
+            case 4:
+                Devolver(&bib);
+                break;
+            case 5:
+                Remover(&bib);
+                break;
+            case 6:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Digite uma opção válida\n");
+        }
+    } while(opcao != 6);
     return 0;
 }
